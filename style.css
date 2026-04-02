@@ -1,0 +1,279 @@
+body {
+  font-family: 'Lora', serif;
+  background: #ffffff;
+  color: #111;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* Titles */
+.title { font-family: 'Lora', serif; font-weight: 700; letter-spacing: 1px; }
+
+/* Hero text với hiệu ứng phóng to */
+@keyframes zoomIn {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.hero-text { 
+  font-family: 'Great Vibes', cursive; 
+  font-size: 2.2rem;  
+  color: #111; 
+  opacity: 0;
+}
+.hero-text.show {
+  opacity: 1;
+  animation: zoomIn 2s ease-out forwards;
+}
+
+/* Reveal Animation */
+.reveal { opacity: 0; transform: translateY(60px); transition: 2s; }
+.show { opacity: 1; transform: translateY(0); }
+
+/* Door Animation */
+.door { transition: 2s; }
+.open-left { transform: translateX(-100%); }
+.open-right { transform: translateX(100%); }
+
+/* Invite Name Decoration */
+.invite-name { 
+  position: relative; 
+  display: inline-block; 
+  font-family: 'Lora', serif; 
+  font-weight: 700; 
+  font-size: 1.5rem; 
+  letter-spacing: 1px; 
+  color: #111; 
+  margin: 12px 0;
+}
+.invite-name::before, .invite-name::after { content: ""; position: absolute; top: 50%; width: 50px; height: 2px; background-color: #111; }
+.invite-name::before { left: -60px; }
+.invite-name::after { right: -60px; }
+
+/* Input Styling */
+input, select, textarea { font-family: 'Lora', serif; border: 1px solid #ccc; border-radius: 6px; background-color: #fff; color: #111; padding: 12px; font-size: 1rem; margin-bottom: 12px; width: 100%; }
+
+/* Buttons */
+button { font-family: 'Great Vibes', cursive; font-weight: 400; cursor: pointer; transition: 0.3s; padding: 12px; border-radius: 6px; border: none; background-color: #d98880; color: #fff; }
+button:hover { opacity: 0.85; }
+
+/* Nhà trai - Nhà gái trượt */
+.reveal-container { overflow: hidden; }
+.reveal-left, .reveal-right { opacity: 0; transform: translateX(0); transition: all 1s ease; }
+.reveal-left { transform: translateX(-100%); }
+.reveal-right { transform: translateX(100%); }
+.reveal-left.show, .reveal-right.show { opacity: 1; transform: translateX(0); }
+
+/* Thư mời */
+.invite-hero {
+  font-family: 'Great Vibes', cursive; /* đổi font */
+   color: #e6a4b4;
+
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: relative;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 2s ease, opacity 1s ease;
+  display: inline-block;
+}
+.invite-hero.show {
+  opacity: 1;
+  transform: scale(1);
+}
+.invite-hero::before,
+.invite-hero::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #d98880);
+}
+
+.invite-hero::before {
+  left: -70px;
+}
+
+.invite-hero::after {
+  right: -70px;
+  background: linear-gradient(to left, transparent, #d98880);
+}
+
+/* Chữ phụ trượt lên */
+.invite-sub {
+   font-family: 'Cormorant Garamond', serif;
+   font-size: 1rem;
+  opacity: 0;
+   color: #777;
+  transform: translateY(20px);
+  transition: transform 2s ease, opacity 1s ease;
+}
+.invite-sub.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tim bay ngang (swing) */
+.falling-heart {
+  position: fixed;
+  font-size: 24px;
+  z-index: 50;
+  top: -50px;
+  color: #ff4d6d;
+  pointer-events: none;
+  animation-name: swingFall;
+  animation-timing-function: linear;
+}
+@keyframes swingFall {
+  0%   { transform: translateX(0) translateY(-50px) rotate(0deg); opacity: 0; }
+  10%  { opacity: 1; }
+  25%  { transform: translateX(20px) translateY(20vh) rotate(-15deg); }
+  50%  { transform: translateX(-20px) translateY(40vh) rotate(15deg); }
+  75%  { transform: translateX(20px) translateY(60vh) rotate(-15deg); }
+  100% { transform: translateX(0) translateY(80vh) rotate(0deg); opacity: 0; }
+}
+.title-main {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 0.2rem;
+  color: #d98880;
+}
+.subtitle {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+/* Lịch */
+.calendar {
+  max-width: 600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem; /* nhỏ lại cho mobile */
+}
+.day {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1; /* FIX QUAN TRỌNG */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff0f5;
+  border-radius: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.day:hover {
+  transform: scale(1.1);
+  background-color: #ffd9e6;
+}
+
+/* Trái tim bay */
+.heart {
+  position: relative;
+}
+.heart span {
+  position: absolute;
+  font-size: 1rem;
+  animation: floatHeart 4s ease-in-out infinite;
+}
+@keyframes floatHeart {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  25% { transform: translateY(-10px) translateX(5px) rotate(-10deg); }
+  50% { transform: translateY(-20px) translateX(-5px) rotate(10deg); }
+  75% { transform: translateY(-10px) translateX(5px) rotate(-5deg); }
+}
+
+/* Tháng */
+.month-label {
+  grid-column: span 7;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #d98880;
+}
+@media (max-width: 480px) {
+  .calendar {
+    gap: 0.4rem;
+  }
+
+  .day {
+    font-size: 0.9rem;
+    border-radius: 12px;
+  }
+}
+/* / */
+.invite-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gạch dài ra 2 bên */
+.divider {
+  height: 2px;
+  background-color: #d98880;
+  width: 0; /* bắt đầu 0, sau animate ra dài */
+  margin: 8px auto;
+  transition: width 1s ease;
+}
+.divider.show { width: 150px; } /* dài ra */
+.divider-top { margin-bottom: 12px; }
+.divider-bottom { margin-top: 12px; }
+
+/* Chữ */
+.invite-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem; /* chữ to hơn */
+  color: #000;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: transform 1s ease, opacity 0.8s ease;
+}
+.invite-title.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.invite-time, .invite-date {
+  font-family: 'Lora', serif;
+  font-size: 1.25rem;
+  font-weight: 800; /* đậm hơn */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 1s ease, opacity 1s ease;
+}
+.invite-time.show, .invite-date.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Divider Top trượt từ trái */
+.divider-top{
+  width: 0;               /* ban đầu 0 */
+  height: 1px;
+  background-color: #000; /* màu đen */
+  margin: 8px auto;
+  transition: width 1s ease;
+}
+
+/* Khi show thì dài ra */
+.divider-top.show {
+  width: 80%; /* hoặc 100% nếu muốn full */
+}
+
+/* Divider Bottom trượt từ phải */
+.divider-bottom {
+  width: 0; 
+  height: 1px;
+  background-color: #000; 
+  margin: 8px auto;
+  transition: width 1s ease;
+}
+
+/* Khi show thì dài ra */
+.divider-bottom.show {
+  width: 80%;
+}
